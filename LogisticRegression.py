@@ -29,7 +29,7 @@ class LogisticModel:
     def report_model_status(self):
         return f'{self.convergency_status}\nModel contains {self.number_of_features} features.\nCurrent weights for model are {self.weights}.\nAverage gradient dLdw is {self.average_gradients}.'
     
-    def fit(self, featureMatrix, outputVector, learningRate, accuracyGoal):
+    def fit(self, featureMatrix, outputVector, learningRate, accuracyGoal, maxIterations):
         
         #Check that number of features attribute is not yet created
         if hasattr(self, 'number_of_features'):
@@ -62,7 +62,7 @@ class LogisticModel:
             current_avg_gradient = np.mean(np.absolute(dLdw))
             
             #Test stop conditions
-            if iterations >= 1000000:
+            if iterations >= maxIterations:
                 self.convergency_status = f'Non converging after {iterations} iterations.'
                 self.average_gradients = current_avg_gradient
                 return 'Model did not converge'
