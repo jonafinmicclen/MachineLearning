@@ -7,8 +7,10 @@ class LogisticModel:
     
     def test(self,featureMatrix,outcomeVector,significanceLevel):
         
-        if significanceLevel >= 0.5:
-            raise ValueError(f'significance level {significanceLevel} must be between 0 and 0.5')
+        if significanceLevel >= 1:
+            raise ValueError(f'significance level {significanceLevel} must be between 0 and 1')
+        #Half significance level because i did the maths wrong later significance level is multiplied by 200 this is to correct for this and to convert to percentage
+        significanceLevel /= 2
         
         predictions = self.predict(featureMatrix)
         self.test_results = predictions
@@ -24,7 +26,7 @@ class LogisticModel:
                 
         self.accuracy = accuracy_count/(len(predictions)-insignificance_count)
         self.positive_test_frequency = 1 - insignificance_count/len(predictions)
-        return f'Model testing complete,\n{round(self.positive_test_frequency*100,2)}% of the inputs are useable to the {round(significanceLevel*100,2)}% significance level\nThe model predicted correctly {self.accuracy*100}% of the time.'
+        return f'Model testing complete,\n{round(self.positive_test_frequency*100,2)}% of the inputs are useable to the {round(significanceLevel*200,2)}% significance level\nThe model predicted correctly {self.accuracy*100}% of the time.'
     
     def report_model_status(self):
         return f'{self.convergency_status}\nModel contains {self.number_of_features} features.\nCurrent weights for model are {self.weights}.\nAverage gradient dLdw is {self.average_gradients}.'
