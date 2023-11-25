@@ -65,7 +65,7 @@ class LogisticModel:
             if iterations >= maxIterations:
                 self.convergency_status = f'Non converging after {iterations} iterations.'
                 self.average_gradients = current_avg_gradient
-                return 'Model did not converge'
+                return self.convergency_status
             
             if current_avg_gradient < accuracyGoal:
                 self.convergency_status = f'Converged after {iterations} iterations.'
