@@ -41,7 +41,7 @@ class LogisticModel:
         #Create vector of all weights with random starting values
         self.weights = np.matrix(np.random.rand(self.number_of_features))
         
-        #Chat gpt generated Adam implementation
+        #Adam implementation
         m = np.zeros_like(self.weights)
         v = np.zeros_like(self.weights)
         beta1 = 0.9  # Exponential decay rates for moment estimates
@@ -72,7 +72,7 @@ class LogisticModel:
                 self.average_gradients = current_avg_gradient
                 return self.convergency_status
             
-            # Adam update rules from chat gpt
+            # Adam update rules
             m = beta1 * m + (1 - beta1) * dLdw
             v = beta2 * v + (1 - beta2) * (dLdw ** 2)
             m_hat = m / (1 - beta1 ** iterations)
