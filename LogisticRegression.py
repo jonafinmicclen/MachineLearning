@@ -82,5 +82,9 @@ class LogisticModel:
             
             iterations += 1
     
-    def predict(self,featureMatrix):
-        return sigmoid(featureMatrix*self.weights.T)
+    def predict(self,featureMatrix, rawPrediction = True, threshold = 0.5):
+        #Gives actual true false prediction when raw prediction value is not wanted
+        if rawPrediction == True:
+            return sigmoid(featureMatrix*self.weights.T) > threshold
+        else:
+            return sigmoid(featureMatrix*self.weights.T)
