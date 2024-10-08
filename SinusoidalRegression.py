@@ -52,8 +52,8 @@ class SinusoidalRegression:
             #Calculate partial derivatives
             try:
                 dLda = sum([-2 * np.sin(self.b * x) * (y - self.predict(x)) for x, y in zip(featureMatrix, outputVector)])/n_of_rows
-                dLdb = sum([2 * self.a * np.cos(self.b*x) * (y - self.predict(x)) for x, y in zip(featureMatrix, outputVector)])/n_of_rows
-                dLdc = sum([2 * (y - self.predict(x)) for x, y in zip(featureMatrix, outputVector)])/n_of_rows
+                dLdb = sum([-2 * x * self.a * np.cos(self.b*x) * (y - self.predict(x)) for x, y in zip(featureMatrix, outputVector)])/n_of_rows
+                dLdc = sum([-2 * (y - self.predict(x)) for x, y in zip(featureMatrix, outputVector)])/n_of_rows
             except:
                 return f'Error in gradient calculation, model did not converge on iteration {iterations}.'
             
